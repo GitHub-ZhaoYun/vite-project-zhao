@@ -1,18 +1,22 @@
 import {fileURLToPath} from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
+import AutoImport from 'unplugin-auto-import/vite' // 自动导入 vue vue-router 等等
+import Components from 'unplugin-vue-components/vite' // 自动导入 vue vue-router 等等
+import {ElementPlusResolver} from 'unplugin-vue-components/resolvers' // 自动按需引入element
 import path from 'path'
-
+import viteCompression from 'vite-plugin-compression' // vite 开启压缩
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 export default defineConfig({
     plugins: [
         vue(),
+        viteCompression({
+            threshold: 1024 // 对大于 1mb 的文件进行压缩
+        }),
         AutoImport({
-            imports:['vue', 'vue-router', 'pinia']//自动导入vue和vue-router相关函数
+            imports:['vue', 'vue-router', 'pinia'], // 自动导入vue和vue-router相关函数
+            resolvers: [ElementPlusResolver()]
         }),
         Components({
             resolvers: [
@@ -41,7 +45,6 @@ export default defineConfig({
             '@': path.resolve(__dirname, './src'),
             '@a': path.resolve(__dirname, './src/assets'),
             '@c': path.resolve(__dirname, './src/components'),
-            'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
         },
         // 情景导出 package.json 配置中的exports字段
         conditions: [],
@@ -60,8 +63,8 @@ export default defineConfig({
             scss: {
                 // 引入 mixin.scss 这样就可以在全局中使用 mixin.scss中预定义的变量了
                 // 给导入的路径最后加上 ;
-                // additionalData: '@import "@/assets/style/mixin.scss";'
-                additionalData: `$injectedColor:orange;`,
+                additionalData: '@import "@/assets/css/mixin.scss";',
+                // additionalData: `$injectedColor:orange;`,
                 javascriptEnabled: true
             }
         }
