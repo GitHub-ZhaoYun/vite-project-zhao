@@ -10,5 +10,7 @@ declare module '@vue/runtime-core' {
     ElButton: typeof import('element-plus/es')['ElButton']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TodoItem: typeof import('./src/components/TodoItem.vue')['default']
+    TreeItem: typeof import('./src/components/TreeItem.vue')['default']
   }
 }

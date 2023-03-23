@@ -18,15 +18,19 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     vertical-align: baseline;
     background: transparent;
 }
+
 body {
     line-height: 1;
 }
-ol, ul {
+
+ol, ul, li {
     list-style: none;
 }
+
 blockquote, q {
     quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
     content: '';
@@ -42,6 +46,7 @@ q:before, q:after {
 ins {
     text-decoration: none;
 }
+
 del {
     text-decoration: line-through;
 }
